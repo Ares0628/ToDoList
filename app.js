@@ -1,17 +1,17 @@
 const express = require("express");
 const mongoose =require("mongoose");
 const _ = require("lodash");
+require("dotenv").config();
 
 const app = express();
-const port = process.env.PORT || 8888;
+const port = process.env.PORT;
 app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 //* Connect to MongoDB
-const url = 'mongodb+srv://admin-Ares0628:test123@cluster0.cpklt4n.mongodb.net/todolistDB';
-mongoose.connect(url)
+mongoose.connect(process.env.MONGODB_URL)
   .then( ()=>console.log('Connected to MongoDB successfully!'))
   .catch(()=>console.log('Failed to connect to MongoDB!'));
 
