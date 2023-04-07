@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose =require("mongoose");
+const path = require('path');
 const _ = require("lodash");
 require("dotenv").config();
 
@@ -9,6 +10,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.static("public"));
+app.set('views', path.join(__dirname, 'views'));
 
 //* Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URL)
@@ -134,3 +136,7 @@ app.get("/about", function(req, res){
 app.listen(port, function() {
   console.log(`Server is listening on port ${port}`);
 });
+
+
+
+module.exports = app;
